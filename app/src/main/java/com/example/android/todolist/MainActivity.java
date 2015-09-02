@@ -3,13 +3,14 @@ package com.example.android.todolist;
 
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends Activity {
 
@@ -18,17 +19,15 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Reminder[] reminders=new Reminder[4];
-        String[] list_item= {"Mon 6/23 - ICS 31 - SSL 270",
-        "Tue 6/24 - Do Homework - Home",
-                "Wed 6/25 - Swimming - Pool",
-                "Sat 6/28 - Watch AntMan - AMC Tustin",
-                };
-        for (int j=0;j<list_item.length;j++){
-            String[] temp=list_item[j].split("-");
-            reminders[j]=new Reminder(temp[1],temp[0],temp[2]);
+        SharedPreferences sharedPref=this.getSharedPreferences("Main_Preference",Context.MODE_PRIVATE);
+        ArrayList<Reminder> new_reminder_arraylist=new ArrayList<Reminder>();
+        Map<String,?> map=sharedPref.getAll();
+        for (Map.Entry<String,?> entry:map.entrySet()){
+            String temp_s= (String) entry.getValue();
+            String[] temp=temp_s.split("-");
+            new_reminder_arraylist.add(new Reminder(temp[1],temp[0],temp[2]));
         }
-        ArrayList<Reminder> reminders_arraylist=new ArrayList<Reminder>(Arrays.asList(reminders));
-        CustomAdapter c_adapter=new CustomAdapter(this,reminders_arraylist);
+        CustomAdapter c_adapter=new CustomAdapter(this,new_reminder_arraylist);
         ListView listView = (ListView) findViewById(R.id.list_view1);
         listView.setAdapter(c_adapter);
     }
@@ -49,11 +48,6 @@ public class MainActivity extends Activity {
 
         //noinspection SimplifiableIfStatement
 
-
-
-        return super.onOptionsItemSelected(item);
-    }
-}
 
 
         return super.onOptionsItemSelected(item);
