@@ -3,33 +3,23 @@ package com.example.android.todolist;
 
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import java.util.ArrayList;
-import java.util.Map;
+
 
 public class MainActivity extends Activity {
-
+    private CustomAdapter customAdapter;
+    private TripleSharedPrefs tsp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Reminder[] reminders=new Reminder[4];
-        SharedPreferences sharedPref=this.getSharedPreferences("Main_Preference",Context.MODE_PRIVATE);
-        ArrayList<Reminder> new_reminder_arraylist=new ArrayList<Reminder>();
-        Map<String,?> map=sharedPref.getAll();
-        for (Map.Entry<String,?> entry:map.entrySet()){
-            String temp_s= (String) entry.getValue();
-            String[] temp=temp_s.split("-");
-            new_reminder_arraylist.add(new Reminder(temp[1],temp[0],temp[2]));
-        }
-        CustomAdapter c_adapter=new CustomAdapter(this,new_reminder_arraylist);
-        ListView listView = (ListView) findViewById(R.id.list_view1);
-        listView.setAdapter(c_adapter);
+        TripleSharedPrefs tsp=new TripleSharedPrefs(this,"MainActivity");
+        new LoadPrefFile().execute(tsp);
     }
 
     @Override
@@ -52,4 +42,16 @@ public class MainActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+    private class LoadPrefFile extends AsyncTask<TripleSharedPrefs,Void,CustomAdapter>{
+        protected CustomAdapter doInBackground(TripleSharedPrefs... tsps){
+            ArrayList<Reminder> reminderArrayList=tsps[0].getAll();
+            customAdapter=new CustomAdapter(tsps[0].getContext(),reminderArrayList);
+            return customAdapter;
+        }
+        protected void onPostExecute(CustomAdapter result){
+            ListView listView=(ListView) findViewById(R.id.list_view1);
+            listView.setAdapter(result);
+        }
+    }
+
 }
