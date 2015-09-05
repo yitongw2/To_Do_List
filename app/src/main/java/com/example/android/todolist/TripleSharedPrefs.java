@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * Created by Tony on 9/2/15.
  */
 public class TripleSharedPrefs {
-    Context context;
     SharedPreferences sharedPref_content;
     SharedPreferences sharedPref_time;
     SharedPreferences sharedPref_location;
@@ -28,9 +27,6 @@ public class TripleSharedPrefs {
             result.add(new Reminder(sharedPref_content.getString(key,null),sharedPref_time.getString(key,null),sharedPref_location.getString(key,null)));
         }
         return result;
-    }
-    protected Context getContext(){
-        return context;
     }
     protected void add(String[] str){
         String new_key=addKey();
