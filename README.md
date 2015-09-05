@@ -1,4 +1,5 @@
 # To_Do_List
-1.03
+1.1
 Upadate: 
-Preference file
+Add new to-do-item enabled;
+background thread;
