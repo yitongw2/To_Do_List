@@ -1,5 +1,6 @@
 package com.example.android.todolist;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,6 +11,7 @@ public class AddActivity extends AppCompatActivity {
     String time;
     String location;
     String content;
+    int id=-1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,11 +25,7 @@ public class AddActivity extends AppCompatActivity {
         time=editText_time.getText().toString();
         location=editText_location.getText().toString();
         content=editText_content.getText().toString();
-        if (!content.isEmpty() && !time.isEmpty() && !location.isEmpty()) {
-            String[] s={content,time,location};
-            TripleSharedPrefs tsf = new TripleSharedPrefs(AddActivity.this.getApplicationContext(), "Main_Activity");
-            tsf.add(s);
-        }
+        new WriteToTPF().execute();
     }
     protected void onStop(){
         super.onStop();
@@ -54,5 +52,21 @@ public class AddActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    private class WriteToTPF extends AsyncTask<Void,Void,Void>{
+        protected Void doInBackground(Void... voids){
+            TripleSharedPrefs tsf = new TripleSharedPrefs(AddActivity.this.getApplicationContext(), "Main_Activity");
+            String[] s={content,time,location};
+            if (id>=0 && content.isEmpty() && time.isEmpty() && location.isEmpty()){
+                tsf.remove(Integer.toString(id));
+            }
+            else if (id>=0 && !content.isEmpty() && !time.isEmpty() && !location.isEmpty()) {
+                tsf.edit(Integer.toString(id),s);
+            }
+            else if (id<0 && !content.isEmpty() && !time.isEmpty() && !location.isEmpty())
+                id=tsf.add(s);
+            return null;
+        }
 
+    }
 }
+
