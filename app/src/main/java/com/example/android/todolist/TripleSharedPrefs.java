@@ -16,19 +16,27 @@ public class TripleSharedPrefs {
     SharedPreferences sharedPref_location;
     SharedPreferences sharedPref_key;
     int size;
+    ArrayList<Reminder> result;
     public TripleSharedPrefs(Context context, String activity_name){
         sharedPref_key=context.getSharedPreferences(activity_name+"_key", Context.MODE_PRIVATE);
         sharedPref_content=context.getSharedPreferences(activity_name+"_content", Context.MODE_PRIVATE);
         sharedPref_time=context.getSharedPreferences(activity_name+"_time", Context.MODE_PRIVATE);
         sharedPref_location=context.getSharedPreferences(activity_name + "_location", Context.MODE_PRIVATE);
         size=sharedPref_key.getAll().size();
+        result=new ArrayList<Reminder>();
+        for (String key:sharedPref_key.getAll().keySet()){
+            result.add(new Reminder(sharedPref_content.getString(key,null),sharedPref_time.getString(key,null),sharedPref_location.getString(key,null),sharedPref_key.getString(key,null)));
+        }
     }
     protected ArrayList<Reminder> getAll(){
-        ArrayList<Reminder> result=new ArrayList<Reminder>();
-        for (String key:sharedPref_key.getAll().keySet()){
-            result.add(new Reminder(sharedPref_content.getString(key,null),sharedPref_time.getString(key,null),sharedPref_location.getString(key,null)));
-        }
         return result;
+    }
+    protected Reminder get(int id){
+        for (Reminder re:result){
+            if (re.getId()==id)
+                return re;
+        }
+        return null;
     }
     protected void edit(String key, String[] str){
         addContent(key, str[0]);
