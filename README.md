@@ -1,5 +1,5 @@
 # To_Do_List
-1.21
+1.22
 Upadate: 
-Delete existing item enabled;
-Fix loss of data during rotating screen;
+Order in ListView by last modified date;
+Store last modified date into SharedPreference file;
