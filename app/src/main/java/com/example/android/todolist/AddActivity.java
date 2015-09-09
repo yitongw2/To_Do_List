@@ -12,10 +12,18 @@ public class AddActivity extends AppCompatActivity {
     String location;
     String content;
     int id=-1;
+    private final String key="id";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState!=null){
+            id=savedInstanceState.getInt(key);
+        }
         setContentView(R.layout.activity_add);
+    }
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.getInt(key,id);
     }
     protected void onPause(){
         super.onPause();
