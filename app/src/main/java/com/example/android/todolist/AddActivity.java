@@ -90,7 +90,7 @@ public class AddActivity extends AppCompatActivity {
             String time=strings[1];
             String location=strings[2];
             TripleSharedPrefs tsf = new TripleSharedPrefs(AddActivity.this.getApplicationContext(), "Main_Activity");
-            String[] s = {content, time, location,Integer.toString(id)};
+            String[] s = {content, time, location,Long.toString(System.currentTimeMillis())};
             if (id >= 0 && content.isEmpty() && time.isEmpty() && location.isEmpty()) {
                 tsf.remove(Integer.toString(id));
             } else if (id >= 0 && (!content.isEmpty() || !time.isEmpty() || !location.isEmpty())) {
