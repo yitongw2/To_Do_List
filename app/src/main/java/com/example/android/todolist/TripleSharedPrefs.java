@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Random;
 
 /**
@@ -15,6 +17,7 @@ public class TripleSharedPrefs {
     SharedPreferences sharedPref_time;
     SharedPreferences sharedPref_location;
     SharedPreferences sharedPref_key;
+    SharedPreferences sharedPref_modifiedDate;
     int size;
     ArrayList<Reminder> result;
     public TripleSharedPrefs(Context context, String activity_name){
@@ -22,13 +25,22 @@ public class TripleSharedPrefs {
         sharedPref_content=context.getSharedPreferences(activity_name+"_content", Context.MODE_PRIVATE);
         sharedPref_time=context.getSharedPreferences(activity_name+"_time", Context.MODE_PRIVATE);
         sharedPref_location=context.getSharedPreferences(activity_name + "_location", Context.MODE_PRIVATE);
+        sharedPref_modifiedDate=context.getSharedPreferences(activity_name + "_modifiedDate", Context.MODE_PRIVATE);
         size=sharedPref_key.getAll().size();
         result=new ArrayList<Reminder>();
         for (String key:sharedPref_key.getAll().keySet()){
-            result.add(new Reminder(sharedPref_content.getString(key,null),sharedPref_time.getString(key,null),sharedPref_location.getString(key,null),sharedPref_key.getString(key,null)));
+            result.add(new Reminder(sharedPref_content.getString(key,null),sharedPref_time.getString(key,null),
+                    sharedPref_location.getString(key,null),sharedPref_key.getString(key,null),
+                    sharedPref_modifiedDate.getLong(key,0)));
         }
     }
     protected ArrayList<Reminder> getAll(){
+        Collections.sort(result, new Comparator<Reminder>() {
+            @Override
+            public int compare(Reminder lhs, Reminder rhs) {
+                return lhs.modifiedDate.compareTo(rhs.modifiedDate);
+            }
+        });
         return result;
     }
     protected Reminder get(int id){
@@ -48,6 +60,7 @@ public class TripleSharedPrefs {
         addContent(new_key, str[0]);
         addTime(new_key, str[1]);
         addLocation(new_key, str[2]);
+        addModifiedDate(new_key, Long.parseLong(str[3]));
         return Integer.parseInt(new_key);
     }
     protected int generateNewKey(){
@@ -75,16 +88,22 @@ public class TripleSharedPrefs {
         time_editor.putString(key,t);
         time_editor.apply();
     }
-    private  void addLocation(String key, String l){
+    private void addLocation(String key, String l){
         SharedPreferences.Editor location_editor=sharedPref_location.edit();
         location_editor.putString(key, l);
         location_editor.apply();
+    }
+    private void addModifiedDate(String key, Long m){
+        SharedPreferences.Editor modifiedDate_editor=sharedPref_modifiedDate.edit();
+        modifiedDate_editor.putLong(key, m);
+        modifiedDate_editor.apply();
     }
     protected int remove(String key){
         removeKey(key);
         removeContent(key);
         removeTime(key);
         removeLocation(key);
+        removeModifiedDate(key);
         size-=1;
         return size;
     }
@@ -107,5 +126,10 @@ public class TripleSharedPrefs {
         SharedPreferences.Editor location_editor=sharedPref_location.edit();
         location_editor.remove(key);
         location_editor.apply();
+    }
+    private void removeModifiedDate(String key){
+        SharedPreferences.Editor modifiedDate_editor=sharedPref_modifiedDate.edit();
+        modifiedDate_editor.remove(key);
+        modifiedDate_editor.apply();
     }
 }
