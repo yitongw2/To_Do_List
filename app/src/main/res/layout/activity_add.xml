@@ -25,5 +25,14 @@
         android:layout_weight="1"
         android:hint="@string/add_activity_content"
         android:gravity="top|left"/>
+    <Button android:id="@+id/activity_add_delete_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0"
+        android:text="@string/add_activity_delete"
+        android:background="#FF1744"
+        android:onClick="deleteReminder"/>
 </LinearLayout>
+
 
