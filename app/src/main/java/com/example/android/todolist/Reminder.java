@@ -8,13 +8,15 @@ public class Reminder {
     private String time;
     private String location;
     private String content;
-    protected Reminder(String c, String t, String l){
+    private int id;
+    protected Reminder(String c, String t, String l, String i){
         time=t;
         location=l;
         content=c;
+        id=Integer.parseInt(i);
     }
     protected Reminder(){
-        this(null,null,null);
+        this(null,null,null,null);
     }
     protected String getTime(){
         return time;
@@ -25,6 +27,7 @@ public class Reminder {
     protected String getContent(){
         return content;
     }
+    protected int getId(){return id;}
     protected void setTime(String t){
         time=t;
     }
