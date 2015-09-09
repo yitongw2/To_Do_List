@@ -10,4 +10,7 @@
     <string name="add_activity_location">Location</string>
     <string name="add_activity_content">Note</string>
     <string name="empty_string"></string>
+    <string name="holder_tag">holderTag</string>
+    <string name="id_tag">idTag</string>
+    <string name="add_activity_delete">DELETE</string>
 </resources>
