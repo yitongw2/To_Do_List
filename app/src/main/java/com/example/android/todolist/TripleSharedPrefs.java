@@ -38,7 +38,7 @@ public class TripleSharedPrefs {
         Collections.sort(result, new Comparator<Reminder>() {
             @Override
             public int compare(Reminder lhs, Reminder rhs) {
-                return lhs.modifiedDate.compareTo(rhs.modifiedDate);
+                return rhs.modifiedDate.compareTo(lhs.modifiedDate);
             }
         });
         return result;
