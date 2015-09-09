@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -21,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
     }
     protected void onStart(){
         super.onStart();
-        new LoadPrefFile().execute(this);
     }
     protected void onResume(){
         super.onResume();
+        new LoadPrefFile().execute(this);
     }
     protected void onRestart(){
         super.onRestart();
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    
+
     }
     private class LoadPrefFile extends AsyncTask<Context,Void,CustomAdapter> {
         ProgressDialog dialog;
@@ -75,9 +77,15 @@ public class MainActivity extends AppCompatActivity {
             listView.setAdapter(customAdapter);
         }
     }
+    public void startAddActivity(View view){
+        LinearLayout linearLayout=(LinearLayout) view;
+        Intent intent=new Intent(this,AddActivity.class);
+        int id=(Integer) linearLayout.getTag(R.string.id_tag);
+        intent.putExtra("id",id);
+        startActivity(intent);
+    }
     private void startAddActivity(){
         Intent intent=new Intent(this,AddActivity.class);
         startActivity(intent);
     }
 }
-
