@@ -6,7 +6,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.android.todolist.AddActivity"
     android:orientation="vertical"
-    android:id="@+id/list_item_linear_layout">
+    >
 
     <EditText android:id="@+id/activity_add_time"
         android:text="@string/empty_string"
@@ -35,5 +35,4 @@
         android:background="#FF1744"
         android:onClick="deleteReminder"/>
 </LinearLayout>
-
 
