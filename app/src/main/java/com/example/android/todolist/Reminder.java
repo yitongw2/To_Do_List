@@ -11,16 +11,16 @@ public class Reminder {
     private String location;
     private String content;
     Date modifiedDate;
-    private int id;
-    protected Reminder(String c, String t, String l, String i, Long m){
+    private long id;
+    protected Reminder(String c, String t, String l, long i, long m){
         time=t;
         location=l;
         content=c;
-        id=Integer.parseInt(i);
+        id=i;
         modifiedDate=new Date(m);
     }
     protected Reminder(){
-        this(null,null,null,null,null);
+        this(null,null,null,0,0);
     }
     protected String getTime(){
         return time;
@@ -31,7 +31,7 @@ public class Reminder {
     protected String getContent(){
         return content;
     }
-    protected int getId(){return id;}
+    protected long getId(){return id;}
     protected String getLastModifiedDate(){return modifiedDate.toString();}
     protected void updateModifiedDate(){modifiedDate=new Date();}
     protected void setTime(String t){
