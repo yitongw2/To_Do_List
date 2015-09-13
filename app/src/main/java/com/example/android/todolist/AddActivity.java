@@ -13,12 +13,10 @@ import android.widget.LinearLayout;
 public class AddActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("to_do_list","onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         if (findViewById(R.id.add_activity_fragment_container) != null) {
             if (savedInstanceState==null){
-                Log.d("to_do_list","onNewAddFragment");
                 AddItemFragment addItemFragment = new AddItemFragment();
                 if (getIntent().hasExtra(MainActivity.key)) {
                     addItemFragment.setArguments(getIntent().getExtras());
@@ -28,12 +26,10 @@ public class AddActivity extends AppCompatActivity {
         }
     }
     protected void onPause(){
-        Log.d("to_do_list","onPause");
         super.onPause();
 
     }
     protected void onResume() {
-        Log.d("to_do_list","onResume");
         super.onResume();
 
     }
