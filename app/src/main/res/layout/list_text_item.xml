@@ -3,7 +3,6 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="horizontal"
     android:id="@+id/list_item_linear_layout"
-    android:onClick="startAddActivity"
     >
     <TextView android:id="@+id/list_item_text1"
         android:text="@string/hello_world"
