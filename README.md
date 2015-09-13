@@ -1,5 +1,5 @@
 # To_Do_List
-1.22
+1.23
 Upadate: 
-Order in ListView by last modified date;
-Store last modified date into SharedPreference file;
+Use fragments;
+Use SQLiteDatabase to store to-do list data;
