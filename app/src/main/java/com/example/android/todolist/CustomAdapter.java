@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Created by Tony on 8/31/15.
@@ -15,7 +17,6 @@ import java.util.ArrayList;
 public class CustomAdapter extends BaseAdapter{
     private LayoutInflater inflater;
     private ArrayList<Reminder> reminders;
-    private String holderTag;
     private class ViewHolder{
         protected TextView textView1;
         protected TextView textView2;
@@ -24,7 +25,14 @@ public class CustomAdapter extends BaseAdapter{
     }
     public CustomAdapter(Context context, ArrayList<Reminder> list){
         inflater= LayoutInflater.from(context);
+        Collections.sort(list, new Comparator<Reminder>() {
+            @Override
+            public int compare(Reminder lhs, Reminder rhs) {
+                return rhs.modifiedDate.compareTo(lhs.modifiedDate);
+            }
+        });
         reminders=list;
+
     }
     public int getCount(){
         return reminders.size();
