@@ -28,14 +28,12 @@ public class AddItemFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d("to_do_list", "onCreateFragment");
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
 
     @Override
     public void onPause() {
-        Log.d("to_do_list", "onPauseFragment");
         super.onPause();
         editText_time = (EditText) getActivity().findViewById(R.id.activity_add_time);
         editText_location = (EditText) getActivity().findViewById(R.id.activity_add_location);
@@ -56,14 +54,12 @@ public class AddItemFragment extends Fragment {
 
     @Override
     public void onResume() {
-        Log.d("to_do_list", "onResumeFragment");
         super.onResume();
         editText_time = (EditText) getActivity().findViewById(R.id.activity_add_time);
         editText_location = (EditText) getActivity().findViewById(R.id.activity_add_location);
         editText_content = (EditText) getActivity().findViewById(R.id.activity_add_content);
         if (id != -1) {
             new FetchRecord().execute(id);
-            Log.d("to_do_list", "onResumeRestoreIdFragment");
         }
     }
 
@@ -71,14 +67,11 @@ public class AddItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Log.d("to_do_list", "onCreateViewFragment");
         if (savedInstanceState != null) {
             id = savedInstanceState.getLong(key);
-            Log.d("to_do_list", "onRestoreIdFragment");
         }
         if (getArguments() != null) {
             id = getArguments().getLong(key);
-            Log.d("to_do_list", "onRestoreArgsFragment");
         }
         View rootView = inflater.inflate(R.layout.fragment_add_item, container, false);
         Button button = (Button) rootView.findViewById(R.id.activity_add_delete_button);
@@ -97,18 +90,15 @@ public class AddItemFragment extends Fragment {
 
     @Override
     public void onAttach(Activity activity) {
-        Log.d("to_do_list", "onAttachFragment");
         super.onAttach(activity);
     }
 
     @Override
     public void onDetach() {
-        Log.d("to_do_list", "onDetachFragment");
         super.onDetach();
     }
 
     public void onSaveInstanceState(Bundle savedInstanceState) {
-        Log.d("to_do_list", "onSaveInstanceStateFragment" + Long.toString(id));
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putLong(key, id);
     }
@@ -128,7 +118,6 @@ public class AddItemFragment extends Fragment {
     }
 
     protected void doInBackground(String... strings) {
-        Log.d("to_do_list", "SaveRecord");
         String content = strings[0];
         String time = strings[1];
         String location = strings[2];
