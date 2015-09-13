@@ -3,3 +3,6 @@
 Upadate: 
 Use fragments;
 Use SQLiteDatabase to store to-do list data;
+
+Bugs:
+Rotation in Add To-Do item fragment (crash);
