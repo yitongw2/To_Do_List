@@ -38,6 +38,10 @@ public class ToDoListFragment extends Fragment {
     }
     public void onPause(){
         super.onPause();
+        reminderArrayList=null;
+        customAdapter=null;
+        rootView=null;
+        mCallback=null;
     }
     public void onResume(){
         super.onResume();
