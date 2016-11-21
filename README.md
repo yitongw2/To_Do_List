@@ -10,6 +10,11 @@ fragments for future support of different screen sizes;
 Bug fixed:
 X - Rotation in Add To-Do item fragment (crash);
 
+
+# Version 1.1 
+Upadate: 
+Add new to-do-item enabled; background thread;
+
 # Version 1.03 
 Upadate: 
 Preference file
