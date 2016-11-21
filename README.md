@@ -13,6 +13,14 @@ fragments for future support of different screen sizes;
 Bug fixed:
 X - Rotation in Add To-Do item fragment (crash);
 
+# Version 1.23 
+Upadate: 
+
+Use fragments; 
+
+Use SQLiteDatabase to store to-do list data;
+
+Bugs: Rotation in Add To-Do item fragment (crash);
 # Version 1.22 
 Upadate: 
 
