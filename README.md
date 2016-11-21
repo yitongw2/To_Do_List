@@ -10,6 +10,9 @@ fragments for future support of different screen sizes;
 Bug fixed:
 X - Rotation in Add To-Do item fragment (crash);
 
+# Version 1.03 
+Upadate: 
+Preference file
 
 # Version 1.02 
 Update: 
