@@ -1,12 +1,15 @@
 # To_Do_List
 
+To_Do_List is an android application that allows user to keep reminders for themselves (e.g. a shopping list).
+
+It usees SQLite databse to store the records. 
 
 # Version 1.25 
 Update:
 
 Log removed;
 
-SQL database;
+SQLite database;
 
 fragments for future support of different screen sizes;
 
