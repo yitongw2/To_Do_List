@@ -14,3 +14,6 @@ X - Rotation in Add To-Do item fragment (crash);
 # 1.02 
 Update: 
 Custom Array Adapter; Custom ListView;
+
+# 1.01 
+Intialize Project To Do List; Add ListView;
